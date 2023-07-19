@@ -24,13 +24,21 @@ For complete API documentation click [here](docs/README.md)!
 ## Build
 
 To build a `k6` binary with this extension, first ensure you have the prerequisites:
+- git
+- docker
+- GNU Makefile
 
-- [Go toolchain](https://go101.org/article/go-toolchain.html)
-- Git
+```bash
+$ make build
+```
 
-Then:
+This command will compile k6 cli tool including the extension for Linux and Windows stored in the bin folder.
 
-1. Install `xk6`:
-  ```bash
-  $ go install go.k6.io/xk6/cmd/xk6@latest
-  ```
+
+You can also build the latest version by hand
+
+```bash
+$ docker run --rm -it -u "$(id -u):$(id -g)" -v "${PWD}/bin:/xk6" grafana/xk6 build latest --with github.com/z26100/xk6-ingest@latest
+```
+
+This command will compile k6 for your current OS and saves it as k6 in your local directory.
