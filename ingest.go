@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	modules.Register("k6/x/ingest", new(INGEST))
+	modules.Register("k6/x/ingest", &INGEST{})
 }
 
 type INGEST struct{}
