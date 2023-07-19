@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"go.k6.io/k6/js/modules"
+	"io"
 	"log"
 	"os"
 )
@@ -22,7 +23,17 @@ func (*INGEST) MakeDirAll(path string) {
 	os.MkdirAll(path, 0755)
 }
 
-func (*INGEST) Copy(source, to string) {
+func (*INGEST) Copy(source, to string) error {
+	src, err := os.Open(source)
+	if err != nil {
+		return err
+	}
+	dst, err := os.Open(to)
+	if err != nil {
+		return err
+	}
+	_, err = io.Copy(dst, src)
+	return err
 }
 
 func (*INGEST) Rename(oldPath, newPath string) {
