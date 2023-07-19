@@ -1,4 +1,4 @@
-# xk6-csv
+# xk6-ingest
 
 A k6 extension enables k6 tests to copy and move files.
 
