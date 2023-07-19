@@ -1,4 +1,4 @@
-module github.com/anycable/xk6-ingest
+module github.com/z26100/xk6-ingest
 go 1.20
 
 require (
