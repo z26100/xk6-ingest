@@ -28,7 +28,7 @@ func (*INGEST) Copy(source, to string) error {
 	if err != nil {
 		return err
 	}
-	dst, err := os.Open(to)
+	dst, err := os.Create(to)
 	if err != nil {
 		return err
 	}
