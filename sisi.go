@@ -27,8 +27,8 @@ type BasicProperties struct {
 
 	MicronPerPixelWidth   float64 `json:"MicronPerPixelWidth"`
 	MicronPerPixelHeight  float64 `json:"MicronPerPixelHeight"`
-	Size                  int32   `json:"Size"`
-	MagnificationLevelMax int32   `json:"MagnificationLevelMax"`
+	Size                  int     `json:"Size"`
+	MagnificationLevelMax int     `json:"MagnificationLevelMax"`
 
 	TileXMinNative int `json:"TileXMinNative"`
 	TileXMaxNative int `json:"TileXMaxNative"`
