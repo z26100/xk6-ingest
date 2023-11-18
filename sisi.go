@@ -1,6 +1,7 @@
 package ingest
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"go.k6.io/k6/js/modules"
@@ -47,6 +48,23 @@ func (*SISI) GetRandomTile(token string, props BasicProperties) error {
 	y := int(rand.Float64()*float64(props.TileYMaxNative-props.TileYMinNative)) + props.TileYMinNative
 	_, err := getTile(token, x, y, x, y, 0)
 	return err
+}
+
+func (*SISI) GetBasicProperties(slideToken string) (*BasicProperties, error) {
+	resp, err := http.Get(fmt.Sprintf("http://localhost:5120/api/simpleslideinterface/v1/slide/%s/base_properties", slideToken))
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, errors.New(fmt.Sprintf("Wrong status code : %d", resp.StatusCode))
+	}
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	var response BasicProperties
+	err = json.Unmarshal(body, &response)
+	return &response, err
 }
 
 func (*SISI) GetSlideToken(url string, rootPath string, path string) (string, error) {
