@@ -115,7 +115,7 @@ func getTile(slideToken string, x1, y1, x2, y2, magnification int) ([]byte, erro
 	return io.ReadAll(resp.Body)
 }
 
-func (*SISI) CloseTile(slideToken string) error {
+func (*SISI) CloseSlide(slideToken string) error {
 	_, err := http.Get(fmt.Sprintf("http://localhost:5120/api/simpleslideinterface/v1/slide/%s/close", slideToken))
 	return err
 }
