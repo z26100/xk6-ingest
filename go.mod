@@ -1,6 +1,6 @@
 module github.com/z26100/xk6-ingest
 
-go 1.19
+go 1.17
 
 require (
 	github.com/fsnotify/fsnotify v1.5.4

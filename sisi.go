@@ -83,6 +83,10 @@ func (*SISI) GetSlideToken(url string, rootPath string, path string) (string, er
 	return strings.ReplaceAll(string(body), "\"", ""), nil
 }
 
+func (*SISI) GetTile(slideToken string, x1, y1, magnification int) ([]byte, error) {
+	return getTile(slideToken, x1, y1, x1, y1, magnification)
+}
+
 func getTile(slideToken string, x1, y1, x2, y2, magnification int) ([]byte, error) {
 	_url := fmt.Sprintf("http://localhost:5120/api/simpleslideinterface/v1/slide/%s/tile", slideToken)
 	req, err := http.NewRequest("GET", _url, nil)
