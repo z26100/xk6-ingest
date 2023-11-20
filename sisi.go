@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"net/http"
 	url2 "net/url"
+	"os"
 	"strings"
 )
 
@@ -41,6 +42,24 @@ func init() {
 }
 
 type SISI struct{}
+
+func (*SISI) GetRandomFile(data []string) string {
+	return data[rand.Intn(len(data))]
+}
+
+func (*SISI) GetMrxsFiles(rootPath string) ([]string, error) {
+	var result []string
+	files, err := os.ReadDir(rootPath)
+	if err != nil {
+		return result, err
+	}
+	for _, f := range files {
+		if strings.HasSuffix(f.Name(), ".mrxs") {
+			result = append(result, f.Name()[:len(f.Name())-5])
+		}
+	}
+	return result, nil
+}
 
 func (*SISI) GetRandomTile(token string, props BasicProperties) error {
 
